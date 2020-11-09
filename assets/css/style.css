@@ -1,0 +1,36 @@
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: 500px}
+    
+/* Set gray background color and 100% height */
+.sidenav {
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+.weatherMain {
+    border: 5px solid lightcoral;
+}
+
+.weatherMainTop {
+    border: 5px solid lightcoral;
+}
+
+.weatherForecast {
+    
+}
+
+.forecastItem {
+    background-color: rgb(0, 110, 255);
+    display: inline-block;
+    height: 175px;
+    width: 175px;
+}
+ 
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height: auto;} 
+}
