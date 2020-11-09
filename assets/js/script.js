@@ -9,12 +9,18 @@ var currentUVIndex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + cityLat
 
 var cityInputEl = document.querySelector("#cityName");
 var cityFormEl = document.querySelector(".inputGroup");
+//input section targets
+
 var cityTitle = document.querySelector("#cityTitle");
 var cityTemp = document.querySelector("#cityTemp");
 var cityHum = document.querySelector("#cityHum");
 var cityWind = document.querySelector("#cityWind");
 var cityIndex = document.querySelector("#cityIndex");
-//targets elements of webpage
+//main weather targets
+
+var sideSection = document.querySelector(".sideSection")
+var sideCityList = sideSection.getElementsByTagName("button");
+//side section targets
 
 var cityObject = {
     "Name" : "",
@@ -23,6 +29,22 @@ var cityObject = {
     "Windspeed": 0, 
     "UV Index": 0,
 };
+
+var cities = [];
+
+function init () {
+    storedCities = JSON.parse(sessionStorage.getItem("Cities"));
+    if (storedCities !== null) {
+        cities = storedCities;
+    }
+    console.log(cities);
+    // Object.keys(sessionStorage).forEach(function(key){
+    //     if (key !== "IsThisFirstTime_Log_From_LiveServer") {
+            
+    //     }
+    // });
+    renderStoredCities();
+}
 
 var weatherSearchHandler = function (event) {
     event.preventDefault();
@@ -42,17 +64,36 @@ var getCityWeather = function (cityName) {
         cityObject.Temperature = data.main.temp - 273.15; //converting to celsius
         cityObject.Humidity = data.main.humidity;
         cityObject.Windspeed = data.wind.speed * 2.237;
-        console.log(cityObject);
-        renderCityDetails(cityObject);
+        var iconcode = data.weather[0].icon;
+        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        $('#wicon').attr('src', iconurl);
+        cities.push(cityObject.Name);
+        storeCity();
+        renderCityDetails(data, cityObject);
+        init();
     }) 
 }
 
-function renderCityDetails (cityObject) {
+function renderCityDetails (data, cityObject) {
     cityTitle.textContent = cityObject.Name;
     cityTemp.textContent  = "Temperature: " + cityObject.Temperature;
     cityHum.textContent = "Humidity: " + cityObject.Humidity;
     cityWind.textContent = "Windspeed: " + cityObject.Windspeed;
-    cityIndex.textContent = 9; //need UV index as well
+    cityIndex.textContent = "UV Index: " + 9; //need UV index as well
+    console.log(data.weather[0].icon);
+    
+}
+
+function storeCity () {
+    sessionStorage.setItem(cityObject.Name, JSON.stringify(cityObject));
+    sessionStorage.setItem("Cities", JSON.stringify(cities));
+    //stores objects in sessionstorage
+}
+
+function renderStoredCities() {
+    for (let i = 0; i < sideCityList.length; i++) {
+        sideCityList[i].textContent = cities[i];
+    }
 }
 
 function getApiUV(requestUrl) {
@@ -66,4 +107,6 @@ function getApiUV(requestUrl) {
 }
 
 cityFormEl.addEventListener('submit', weatherSearchHandler);
-
+// getCityWeather("Sydney");
+//uncomment for testing
+init();
