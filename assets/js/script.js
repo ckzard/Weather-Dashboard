@@ -101,12 +101,14 @@ function renderCityDetails (data, cityObject) {
 function renderCityForecast (data) {
     console.log(data);
     for (let i = 0; i < forecastBoxes.length; i++) {
-        var date = data.daily[i].dt;
+        var unixTime = (data.daily[i + 1].dt);
+        var date = new Date(unixTime * 1000);
+        var formattedDate = date.toLocaleDateString("en-US");
         var icon = data.daily[i]["weather"][0]["icon"];
         var temp = Math.round(data.daily[i]["temp"].day - kelv) + "°C";
         var humidity = data.daily[i].humidity + "%";
 
-        $(forecastBoxes[i]).append("<p>" + date +"</p>")
+        $(forecastBoxes[i]).append("<p>" + formattedDate +"</p>")
         $(forecastBoxes[i]).append("<p><img id='' src='http://openweathermap.org/img/w/'" + icon + "alt=''></p>")
         $(forecastBoxes[i]).append("<p>" + "Temp: " + temp + "</p>")
         $(forecastBoxes[i]).append("<p>" + "Humidity: " + humidity + "</p>")
