@@ -4,7 +4,7 @@
 /* Set gray background color and 100% height */
 .sidenav {
   background-color: #f1f1f1;
-  height: 100%;
+  height: auto;
 }
 .form-input {
   width: 100%;
@@ -42,7 +42,18 @@ button:hover {
 
 .weatherMainTop {
     border: 2px solid lightgrey;
-    height: 200px;
+    height: auto;
+    width: auto;
+    margin: 10px;
+}
+
+.weatherMainTop, ul {
+  font-size: large;
+  padding-left: 10px;
+}
+
+#icon {
+
 }
 
 .forecastItem {

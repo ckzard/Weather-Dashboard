@@ -104,7 +104,19 @@ function renderCityForecast (data) {
         $("p").remove();
         //removes weather elements in forecast box for the next loop to add more
     }
-    cityIndex.textContent = "UV Index: " + data.current.uvi;
+    cityIndex.textContent = "UV Index: " + Math.round(data.current.uvi);
+    var uviData = Math.round(data.current.uvi);
+    if (uviData <= 2) {
+        cityIndex.setAttribute("style", "color: limegreen; -webkit-text-stroke-width: 0.75px; -webkit-text-stroke-color: black;");
+    } else if (uviData <= 5){
+        cityIndex.setAttribute("style", "color: yellow; -webkit-text-stroke-width: 0.75px; -webkit-text-stroke-color: black;");
+    } else if (uviData <= 7) {
+        cityIndex.setAttribute("style", "color: orange; -webkit-text-stroke-width: 0.75px; -webkit-text-stroke-color: black;");
+    } else if (uviData <= 10) {
+        cityIndex.setAttribute("style", "color: red; -webkit-text-stroke-width: 0.75px; -webkit-text-stroke-color: black;");
+    } else if (uviData > 10) {
+        cityIndex.setAttribute("style", "color: violet; -webkit-text-stroke-width: 0.75px; -webkit-text-stroke-color: black;");
+    }
     for (let i = 0; i < forecastBoxes.length; i++) {
         var unixTime = (data.daily[i + 1].dt);
         var date = new Date(unixTime * 1000);
