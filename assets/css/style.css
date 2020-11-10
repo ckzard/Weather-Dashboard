@@ -39,6 +39,11 @@ button:hover {
 .btn {
   border: 2px solid black;
   margin: 5px;
+  background-color: rgb(0, 110, 255);
+}
+
+svg {
+  color: white;
 }
 
 .weatherMain {
