@@ -139,6 +139,7 @@ function removeStoredCities () {
     for (let i = 0; i < sideCityList.length; i++) {
         sideCityList[i].textContent = "";
     }
+    location.reload();
 }
 
 function getApiUV(requestUrl) {
