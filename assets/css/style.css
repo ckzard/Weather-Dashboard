@@ -20,6 +20,16 @@ li {
   width: 100%;
 }
 
+.deleteHistory {
+  left: 10px;
+  color: white;
+  background-color: rgb(0, 110, 255);
+}
+
+button:hover {
+  border: none;
+}
+
 .weatherMain {
     border: 2px solid lightgrey;
 }

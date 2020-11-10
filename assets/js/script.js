@@ -43,11 +43,6 @@ function init () {
         cities = storedCities;
     }
     console.log(cities);
-    // Object.keys(sessionStorage).forEach(function(key){
-    //     if (key !== "IsThisFirstTime_Log_From_LiveServer") {
-            
-    //     }
-    // });
     renderStoredCities();
 }
 
