@@ -1,6 +1,7 @@
 var apiKey = "dc4f43c3284c5d9fc2e4a7144ca92ad9";
 var cityLongitude = 0;
 var cityLatitude = 0;
+var kelv = 273.15;
 // convert kelvin to celsius by subtracting 273.15 from kelvin;
 
 var fiveDayWeatherRequestUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey;
@@ -46,7 +47,6 @@ function init () {
     //     }
     // });
     renderStoredCities();
-    renderCityForecast("Toronto");
 }
 
 var weatherSearchHandler = function (event) {
@@ -63,12 +63,10 @@ var getCityWeather = function (cityName) {
         return response.json()
     })
     .then(function(data) {
-        console.log(data.coord.lon);
-        console.log(data.coord.lat);
         cityObject.Name = cityName;
-        cityObject.Temperature = data.main.temp - 273.15; //converting to celsius
-        cityObject.Humidity = data.main.humidity;
-        cityObject.Windspeed = data.wind.speed * 2.237;
+        cityObject.Temperature = Math.round(data.main.temp - 273.15) + "°C"; //converting to celsius
+        cityObject.Humidity = data.main.humidity + "%";
+        cityObject.Windspeed = data.wind.speed * 2.237 + "mph";
         var iconcode = data.weather[0].icon;
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         $('#wicon').attr('src', iconurl);
@@ -97,17 +95,21 @@ function renderCityDetails (data, cityObject) {
     cityHum.textContent = "Humidity: " + cityObject.Humidity;
     cityWind.textContent = "Windspeed: " + cityObject.Windspeed;
     cityIndex.textContent = "UV Index: " + 9; //need UV index as well
-    console.log(data.weather[0].icon);
     
 }
 
 function renderCityForecast (data) {
-    var forecastData = data;
+    console.log(data);
     for (let i = 0; i < forecastBoxes.length; i++) {
-        $(forecastBoxes[i]).append("<p>Date here</p>")
-        $(forecastBoxes[i]).append("<p>Icon Here</p>")
-        $(forecastBoxes[i]).append("<p>Temperature</p>")
-        $(forecastBoxes[i]).append("<p>Humidity</p>")
+        var date = data.daily[i].dt;
+        var icon = data.daily[i]["weather"][0]["icon"];
+        var temp = Math.round(data.daily[i]["temp"].day - kelv) + "°C";
+        var humidity = data.daily[i].humidity + "%";
+
+        $(forecastBoxes[i]).append("<p>" + date +"</p>")
+        $(forecastBoxes[i]).append("<p><img id='' src='http://openweathermap.org/img/w/'" + icon + "alt=''></p>")
+        $(forecastBoxes[i]).append("<p>" + "Temp: " + temp + "</p>")
+        $(forecastBoxes[i]).append("<p>" + "Humidity: " + humidity + "</p>")
     }
 }
 
