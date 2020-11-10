@@ -56,6 +56,10 @@ button:hover {
     padding: 5px;
     border-radius: 10px;
 }
+
+.forecastItem, p {
+  margin-bottom: 5px;
+}
  
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
