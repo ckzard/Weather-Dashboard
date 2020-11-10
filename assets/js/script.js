@@ -90,7 +90,10 @@ var getCityForecast = function (lat, lon) {
 }
 
 function renderCityDetails (data, cityObject) {
-    cityTitle.textContent = cityObject.Name;
+    var unixTime = (data.dt);
+    var date = new Date(unixTime * 1000);
+    var formattedDate = date.toLocaleDateString("en-US");
+    cityTitle.textContent = cityObject.Name + " " + formattedDate;
     cityTemp.textContent  = "Temperature: " + cityObject.Temperature;
     cityHum.textContent = "Humidity: " + cityObject.Humidity;
     cityWind.textContent = "Windspeed: " + cityObject.Windspeed;
