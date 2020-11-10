@@ -64,7 +64,7 @@ var getCityWeather = function (cityName) {
         cityObject.Name = cityName;
         cityObject.Temperature = Math.round(data.main.temp - 273.15) + "°C"; //converting to celsius
         cityObject.Humidity = data.main.humidity + "%";
-        cityObject.Windspeed = data.wind.speed * 2.237 + "mph";
+        cityObject.Windspeed = Math.round(data.wind.speed * 2.237) + " mph";
         var iconcode = data.weather[0].icon;
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         $('#wicon').attr('src', iconurl);
