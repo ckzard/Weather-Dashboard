@@ -104,6 +104,10 @@ function renderCityDetails (data, cityObject) {
 
 function renderCityForecast (data) {
     console.log(data);
+    for (let i = 0; i < forecastBoxes.length; i++) {
+        $("p").remove();
+        //removes weather elements in forecast box for the next loop to add more
+    }
     cityIndex.textContent = "UV Index: " + data.current.uvi;
     for (let i = 0; i < forecastBoxes.length; i++) {
         var unixTime = (data.daily[i + 1].dt);
