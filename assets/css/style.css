@@ -27,7 +27,12 @@ li {
 }
 
 button:hover {
-  border: none;
+  border: 1px solid black;
+}
+
+.btn {
+  border: 2px solid black;
+  margin: 5px;
 }
 
 .weatherMain {
