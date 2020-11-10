@@ -2,6 +2,7 @@ var apiKey = "dc4f43c3284c5d9fc2e4a7144ca92ad9";
 var cityLongitude = 0;
 var cityLatitude = 0;
 var kelv = 273.15;
+var state = 0;
 // convert kelvin to celsius by subtracting 273.15 from kelvin;
 
 var fiveDayWeatherRequestUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey;
@@ -24,6 +25,7 @@ var sideCityList = sideSection.getElementsByTagName("button");
 //side section targets
 
 var forecastBoxes = document.querySelectorAll(".forecastItem");
+//targets the group of forecast boxes
 
 var cityObject = {
     "Name" : "",
@@ -112,11 +114,11 @@ function renderCityForecast (data) {
         var humidity = data.daily[i].humidity + "%";
 
         $(forecastBoxes[i].setAttribute("style", "opacity: 100%;"))
-
         $(forecastBoxes[i]).append("<p>" + formattedDate +"</p>")
         $(forecastBoxes[i]).append("<p><img id='' src='http://openweathermap.org/img/w/'" + icon + "alt=''></p>")
         $(forecastBoxes[i]).append("<p>" + "Temp: " + temp + "</p>")
         $(forecastBoxes[i]).append("<p>" + "Humidity: " + humidity + "</p>")
+           
     }
 }
 
@@ -143,7 +145,13 @@ function getApiUV(requestUrl) {
 }
 
 cityFormEl.addEventListener('submit', weatherSearchHandler);
-// getCityWeather("Sydney");
+
+sideSection.addEventListener("click", function (event) {
+    event.preventDefault();
+    var element = event.target;
+
+    getCityWeather(element.textContent)
+})
 //uncomment for testing
 
 init();
