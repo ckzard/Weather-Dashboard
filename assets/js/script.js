@@ -53,8 +53,8 @@ function init () {
 
 var weatherSearchHandler = function (event) {
     event.preventDefault();
-
     var cityName = cityInputEl.value.trim();
+    cityInputEl.value = "";
     getCityWeather(cityName);
 };
 
@@ -148,7 +148,7 @@ function getApiUV(requestUrl) {
     })
 }
 
-cityFormEl.addEventListener('submit', weatherSearchHandler);
+cityFormEl.addEventListener("submit", weatherSearchHandler);
 
 sideSection.addEventListener("click", function (event) {
     event.preventDefault();
