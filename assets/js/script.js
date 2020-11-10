@@ -39,7 +39,7 @@ var cityObject = {
 var cities = [];
 
 function init () {
-    storedCities = JSON.parse(sessionStorage.getItem("Cities"));
+    storedCities = JSON.parse(localStorage.getItem("Cities"));
     if (storedCities !== null) {
         cities = storedCities;
     }
@@ -135,9 +135,9 @@ function renderCityForecast (data) {
 }
 
 function storeCity () {
-    sessionStorage.setItem(cityObject.Name, JSON.stringify(cityObject));
-    sessionStorage.setItem("Cities", JSON.stringify(cities));
-    //stores objects in sessionstorage
+    localStorage.setItem(cityObject.Name, JSON.stringify(cityObject));
+    localStorage.setItem("Cities", JSON.stringify(cities));
+    //stores objects in localstorage
 }
 
 function renderStoredCities() {
@@ -147,7 +147,7 @@ function renderStoredCities() {
 }
 
 function removeStoredCities () {
-    sessionStorage.setItem("Cities", "");
+    localStorage.setItem("Cities", "");
     for (let i = 0; i < sideCityList.length; i++) {
         sideCityList[i].textContent = "";
     }
