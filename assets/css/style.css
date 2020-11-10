@@ -13,19 +13,21 @@
 }
 
 .weatherMain {
-    border: 5px solid lightcoral;
+    border: 2px solid lightgrey;
 }
 
 .weatherMainTop {
-    border: 5px solid lightcoral;
+    border: 2px solid lightgrey;
 }
-
 
 .forecastItem {
     background-color: rgb(0, 110, 255);
     display: inline-block;
-    height: 175px;
-    width: 175px;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
 }
  
 /* On small screens, set height to 'auto' for sidenav and grid */

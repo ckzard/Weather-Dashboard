@@ -22,6 +22,8 @@ var sideSection = document.querySelector(".sideSection")
 var sideCityList = sideSection.getElementsByTagName("button");
 //side section targets
 
+var forecastBoxes = document.querySelectorAll(".forecastItem");
+
 var cityObject = {
     "Name" : "",
     "Temperature" : 0,
@@ -44,6 +46,7 @@ function init () {
     //     }
     // });
     renderStoredCities();
+    renderCityForecast("Toronto");
 }
 
 var weatherSearchHandler = function (event) {
@@ -60,6 +63,8 @@ var getCityWeather = function (cityName) {
         return response.json()
     })
     .then(function(data) {
+        console.log(data.coord.lon);
+        console.log(data.coord.lat);
         cityObject.Name = cityName;
         cityObject.Temperature = data.main.temp - 273.15; //converting to celsius
         cityObject.Humidity = data.main.humidity;
@@ -68,10 +73,22 @@ var getCityWeather = function (cityName) {
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         $('#wicon').attr('src', iconurl);
         cities.push(cityObject.Name);
+        getCityForecast(data.coord.lat, data.coord.lon);
         storeCity();
         renderCityDetails(data, cityObject);
         init();
     }) 
+}
+
+var getCityForecast = function (lat, lon) {
+    var requestUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={part}&appid=" + apiKey;
+    fetch(requestUrl)
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        renderCityForecast(data);
+    })
 }
 
 function renderCityDetails (data, cityObject) {
@@ -82,6 +99,16 @@ function renderCityDetails (data, cityObject) {
     cityIndex.textContent = "UV Index: " + 9; //need UV index as well
     console.log(data.weather[0].icon);
     
+}
+
+function renderCityForecast (data) {
+    var forecastData = data;
+    for (let i = 0; i < forecastBoxes.length; i++) {
+        $(forecastBoxes[i]).append("<p>Date here</p>")
+        $(forecastBoxes[i]).append("<p>Icon Here</p>")
+        $(forecastBoxes[i]).append("<p>Temperature</p>")
+        $(forecastBoxes[i]).append("<p>Humidity</p>")
+    }
 }
 
 function storeCity () {
@@ -109,4 +136,5 @@ function getApiUV(requestUrl) {
 cityFormEl.addEventListener('submit', weatherSearchHandler);
 // getCityWeather("Sydney");
 //uncomment for testing
+
 init();
