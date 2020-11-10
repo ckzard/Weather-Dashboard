@@ -10,6 +10,11 @@
   width: 100%;
 }
 
+.inputGroup {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 li {
   list-style-type: none;
   font-weight: bold;
@@ -50,10 +55,6 @@ button:hover {
 .weatherMainTop, ul {
   font-size: large;
   padding-left: 10px;
-}
-
-#icon {
-
 }
 
 .forecastItem {
