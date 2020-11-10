@@ -22,6 +22,7 @@ var cityIndex = document.querySelector("#cityIndex");
 
 var sideSection = document.querySelector(".sideSection")
 var sideCityList = sideSection.getElementsByTagName("button");
+var deleteHistory = document.querySelector(".deleteHistory");
 //side section targets
 
 var forecastBoxes = document.querySelectorAll(".forecastItem");
@@ -133,6 +134,13 @@ function renderStoredCities() {
     }
 }
 
+function removeStoredCities () {
+    sessionStorage.setItem("Cities", "");
+    for (let i = 0; i < sideCityList.length; i++) {
+        sideCityList[i].textContent = "";
+    }
+}
+
 function getApiUV(requestUrl) {
     fetch(requestUrl)
     .then(function(response) {
@@ -150,6 +158,13 @@ sideSection.addEventListener("click", function (event) {
     var element = event.target;
 
     getCityWeather(element.textContent)
+})
+
+deleteHistory.addEventListener("click", function (event) {
+    event.preventDefault();
+    var element = event.target;
+    console.log(element)
+    removeStoredCities();
 })
 //uncomment for testing
 
