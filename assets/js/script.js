@@ -94,12 +94,12 @@ function renderCityDetails (data, cityObject) {
     cityTemp.textContent  = "Temperature: " + cityObject.Temperature;
     cityHum.textContent = "Humidity: " + cityObject.Humidity;
     cityWind.textContent = "Windspeed: " + cityObject.Windspeed;
-    cityIndex.textContent = "UV Index: " + 9; //need UV index as well
     
 }
 
 function renderCityForecast (data) {
     console.log(data);
+    cityIndex.textContent = "UV Index: " + data.current.uvi;
     for (let i = 0; i < forecastBoxes.length; i++) {
         var unixTime = (data.daily[i + 1].dt);
         var date = new Date(unixTime * 1000);
