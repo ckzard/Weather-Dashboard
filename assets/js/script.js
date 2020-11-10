@@ -108,6 +108,8 @@ function renderCityForecast (data) {
         var temp = Math.round(data.daily[i]["temp"].day - kelv) + "°C";
         var humidity = data.daily[i].humidity + "%";
 
+        $(forecastBoxes[i].setAttribute("style", "opacity: 100%;"))
+
         $(forecastBoxes[i]).append("<p>" + formattedDate +"</p>")
         $(forecastBoxes[i]).append("<p><img id='' src='http://openweathermap.org/img/w/'" + icon + "alt=''></p>")
         $(forecastBoxes[i]).append("<p>" + "Temp: " + temp + "</p>")
